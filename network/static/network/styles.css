@@ -1,0 +1,18 @@
+#form{
+    display: none;
+}
+
+.main > button {
+    padding: 0px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: blue;
+    outline: none;
+}
+
+/* .main > button:hover{
+    padding: 0px;
+    border: none;
+    background: none;
+} */

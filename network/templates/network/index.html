@@ -1,0 +1,26 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <h1>All post</h1>
+    <div>
+        <h3>new post</h3>
+        <div>
+            <form action="{% url 'newpost' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <textarea name="newPost" id="post" cols="205" rows="2"></textarea>
+                <button type="submit" class="post-button btn btn-primary" value=post>submit</button>
+            </form>           
+        </div>
+    </div>
+
+    <div>
+        {{ users.username }}
+        {% for post in posts %}
+            {{ post.user }}
+            {{ post.posts }}
+        {% endfor %}     
+        
+    </div>
+
+
+{% endblock %}
