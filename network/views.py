@@ -12,9 +12,7 @@ import datetime
 from .models import User, Post, Profile
 
 def index(request):    
-    post = Post.objects.all().order_by("time").reverse()
-    #  post = Post.objects.all().order_by("time").reverse()
-        
+    post = Post.objects.all().order_by("time").reverse()        
     return render(request, "network/post.html", {            
         "posts": post                       
     })
@@ -26,10 +24,9 @@ def newpost(request):
     if request.method == 'POST':        
         post = Post()
         post.user = user
-        post.posts = request.POST["newPost"]
-        
+        post.posts = request.POST["newPost"]       
         post.save()
-
+        
         return HttpResponseRedirect(reverse("index"))
 
     return render(request, "network/index.html")  
