@@ -60,6 +60,7 @@ def like(request, post_id):
     }
     return JsonResponse({'result': result})
 
+@login_required(login_url='login')
 def user(request, username):
     try:
         user = User.objects.get(username=username)
@@ -77,7 +78,7 @@ def user(request, username):
         'users_profile': users_profile,
         "posts": post
     })
-
+@login_required(login_url='login')
 def follow(request):
     if request.method == "POST":
         log = request.POST["user"]
@@ -98,11 +99,9 @@ def follow(request):
         else:
             profile.followers.add(request.user)
             profile.save()
-
-
-        return render(request, "network/profile.html")
+        return HttpResponseRedirect(reverse("user", kwargs={"username": log}))
     
-    return render(request, "network/profile.html")
+    # return render(request, "network/profile.html")
 
 
 def following(request):

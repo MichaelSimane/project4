@@ -8,7 +8,7 @@
         {%if request.user != user%}  
             <form action="{% url 'follow' %}" method="post">
                 {% csrf_token %}
-                <button class="btn btn-outline-primary btn-sm mx-2 h-25" id="follow-btn" name="user" value="{{ user.username }}" data-user="{{user.username}}">
+                <button class="btn btn-outline-primary btn-sm mx-2 h-25" id="follow-btn" name="user" value="{{ user.username }}">
                     {% if user in users_profile.following.all %}
                         Unfollow
                     {% else %}
@@ -17,7 +17,7 @@
                 </button>
             </form>              
         {%endif %}
-        
+                
         <div>
             followers: {{ follower }}
         </div>
