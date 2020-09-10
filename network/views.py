@@ -18,6 +18,7 @@ def index(request):
     return render(request, "network/post.html", {            
         "posts": post                       
     })
+    
 
 def newpost(request):
     user = User.objects.get(email=request.user.email)
@@ -32,6 +33,7 @@ def newpost(request):
         return HttpResponseRedirect(reverse("index"))
 
     return render(request, "network/index.html")  
+
 
 def edit(request, post_id):   
     post = Post.objects.get(pk=post_id)
@@ -60,6 +62,7 @@ def like(request, post_id):
     }
     return JsonResponse({'result': result})
 
+
 @login_required(login_url='login')
 def user(request, username):
     try:
@@ -78,11 +81,13 @@ def user(request, username):
         'users_profile': users_profile,
         "posts": post
     })
+
+
 @login_required(login_url='login')
 def follow(request):
     if request.method == "POST":
-        log = request.POST["user"]
-        user = User.objects.get(username=log)
+        login_user = request.POST["user"]
+        user = User.objects.get(username=login_user)
         profile = Profile.objects.get(user=request.user)
         if user in profile.following.all():
              profile.following.remove(user)
@@ -99,9 +104,7 @@ def follow(request):
         else:
             profile.followers.add(request.user)
             profile.save()
-        return HttpResponseRedirect(reverse("user", kwargs={"username": log}))
-    
-    # return render(request, "network/profile.html")
+        return HttpResponseRedirect(reverse("user", kwargs={"username": login_user})) 
 
 
 def following(request):
