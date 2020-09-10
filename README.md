@@ -1,3 +1,4 @@
-project4
+Project 4: Network
 
-social network website for making posts and following users
+Website for making posts and following users using django
+
